@@ -5,7 +5,7 @@ import com.mrbysco.buriedwrecks.feature.BuriedWreckFeature;
 import com.mrbysco.buriedwrecks.util.BuriedBiomeTags;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
@@ -18,7 +18,7 @@ import java.util.Map;
 public class ModStructures {
 	public static final ResourceKey<Structure> BURIED_SHIPWRECK = createKey("buried_shipwreck");
 
-	public static void bootstrap(BootstapContext<Structure> context) {
+	public static void bootstrap(BootstrapContext<Structure> context) {
 		HolderGetter<Biome> biomeGetter = context.lookup(Registries.BIOME);
 
 		context.register(BURIED_SHIPWRECK, new BuriedWreckFeature(

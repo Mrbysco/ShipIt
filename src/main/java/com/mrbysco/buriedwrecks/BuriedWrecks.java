@@ -8,7 +8,9 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.levelgen.structure.Structure;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
@@ -21,8 +23,8 @@ public class BuriedWrecks {
 
 	public static TagKey<Structure> HAS_BURIED_WRECK = TagKey.create(Registries.STRUCTURE, new ResourceLocation(BuriedWrecks.MOD_ID, "has_buried_wreck"));
 
-	public BuriedWrecks(IEventBus eventBus) {
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BuriedConfig.commonSpec);
+	public BuriedWrecks(IEventBus eventBus, Dist dist, ModContainer container) {
+		container.registerConfig(ModConfig.Type.COMMON, BuriedConfig.commonSpec);
 
 		ModStructureTypes.STRUCTURE_TYPES.register(eventBus);
 		ModStructurePieceTypes.STRUCTURE_PIECE_TYPES.register(eventBus);

@@ -1,6 +1,7 @@
 package com.mrbysco.buriedwrecks.feature;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.mrbysco.buriedwrecks.config.BuriedConfig;
 import com.mrbysco.buriedwrecks.registry.ModStructureTypes;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilde
 import java.util.Optional;
 
 public class BuriedWreckFeature extends Structure {
-	public static final Codec<BuriedWreckFeature> CODEC = RecordCodecBuilder.create((builder) -> {
+	public static final MapCodec<BuriedWreckFeature> CODEC = RecordCodecBuilder.mapCodec((builder) -> {
 		return builder.group(settingsCodec(builder),
 				Codec.BOOL.fieldOf("is_beached").forGetter((feature) -> {
 					return feature.isBeached;

@@ -6,6 +6,7 @@ import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.RandomizableContainer;
@@ -24,6 +25,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.BlockIgnorePr
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootTable;
 
 import java.util.Map;
 
@@ -62,7 +64,7 @@ public class BuriedShipwreckPieces {
 			new ResourceLocation(BuriedWrecks.MOD_ID, "buried_shipwreck/rightsideup_full_degraded"),
 			new ResourceLocation(BuriedWrecks.MOD_ID, "buried_shipwreck/rightsideup_fronthalf_degraded"),
 			new ResourceLocation(BuriedWrecks.MOD_ID, "buried_shipwreck/rightsideup_backhalf_degraded")};
-	static final Map<String, ResourceLocation> MARKERS_TO_LOOT = Map.of(
+	static final Map<String, ResourceKey<LootTable>> MARKERS_TO_LOOT = Map.of(
 			"map_chest", BuiltInLootTables.SHIPWRECK_MAP,
 			"treasure_chest", BuiltInLootTables.SHIPWRECK_TREASURE,
 			"supply_chest", BuiltInLootTables.SHIPWRECK_SUPPLY);
@@ -87,6 +89,7 @@ public class BuriedShipwreckPieces {
 			this.isBeached = tag.getBoolean("isBeached");
 		}
 
+		@Override
 		protected void addAdditionalSaveData(StructurePieceSerializationContext serializationContext, CompoundTag tag) {
 			super.addAdditionalSaveData(serializationContext, tag);
 			tag.putBoolean("isBeached", this.isBeached);
@@ -98,15 +101,17 @@ public class BuriedShipwreckPieces {
 					.addProcessor(BlockIgnoreProcessor.STRUCTURE_AND_AIR);
 		}
 
-		protected void handleDataMarker(String marker, BlockPos pos, ServerLevelAccessor levelAccessor, RandomSource random, BoundingBox boundingBox) {
-			ResourceLocation resourcelocation = BuriedShipwreckPieces.MARKERS_TO_LOOT.get(marker);
-			if (resourcelocation != null) {
-				RandomizableContainer.setBlockEntityLootTable(levelAccessor, random, pos.below(), resourcelocation);
+		@Override
+		protected void handleDataMarker(String pName, BlockPos pPos, ServerLevelAccessor pLevel, RandomSource pRandom, BoundingBox pBox) {
+			ResourceKey<LootTable> resourcekey = BuriedShipwreckPieces.MARKERS_TO_LOOT.get(pName);
+			if (resourcekey != null) {
+				RandomizableContainer.setBlockEntityLootTable(pLevel, pRandom, pPos.below(), resourcekey);
 			}
 		}
 
+		@Override
 		public void postProcess(WorldGenLevel worldGenLevel, StructureManager structureManager, ChunkGenerator chunkGenerator,
-								RandomSource random, BoundingBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
+		                        RandomSource random, BoundingBox boundingBox, ChunkPos chunkPos, BlockPos pos) {
 			int i = worldGenLevel.getMaxBuildHeight();
 			int j = pos.getY();
 

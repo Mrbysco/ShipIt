@@ -18,7 +18,7 @@ import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 public class BuriedDatagen {
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
@@ -64,7 +64,7 @@ public class BuriedDatagen {
 
 	public static class BuriedStructureFeatureTagProvider extends TagsProvider<Structure> {
 		public BuriedStructureFeatureTagProvider(PackOutput generator, CompletableFuture<HolderLookup.Provider> completableFuture,
-												 @Nullable ExistingFileHelper existingFileHelper) {
+		                                         @Nullable ExistingFileHelper existingFileHelper) {
 			super(generator, Registries.STRUCTURE, completableFuture, BuriedWrecks.MOD_ID, existingFileHelper);
 		}
 
@@ -77,7 +77,7 @@ public class BuriedDatagen {
 
 	public static class BuriedBiomeTagProvider extends BiomeTagsProvider {
 		public BuriedBiomeTagProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> completableFuture,
-									  @Nullable ExistingFileHelper existingFileHelper) {
+		                              @Nullable ExistingFileHelper existingFileHelper) {
 			super(packOutput, completableFuture, BuriedWrecks.MOD_ID, existingFileHelper);
 		}
 
