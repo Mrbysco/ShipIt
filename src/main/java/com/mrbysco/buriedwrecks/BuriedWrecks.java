@@ -11,7 +11,6 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import org.slf4j.Logger;
@@ -21,7 +20,7 @@ public class BuriedWrecks {
 	public static final String MOD_ID = "buriedwrecks";
 	public static final Logger LOGGER = LogUtils.getLogger();
 
-	public static TagKey<Structure> HAS_BURIED_WRECK = TagKey.create(Registries.STRUCTURE, new ResourceLocation(BuriedWrecks.MOD_ID, "has_buried_wreck"));
+	public static TagKey<Structure> HAS_BURIED_WRECK = TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(BuriedWrecks.MOD_ID, "has_buried_wreck"));
 
 	public BuriedWrecks(IEventBus eventBus, Dist dist, ModContainer container) {
 		container.registerConfig(ModConfig.Type.COMMON, BuriedConfig.commonSpec);

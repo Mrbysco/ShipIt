@@ -29,6 +29,6 @@ public class ModStructures {
 	}
 
 	private static ResourceKey<Structure> createKey(String name) {
-		return ResourceKey.create(Registries.STRUCTURE, new ResourceLocation(BuriedWrecks.MOD_ID, name));
+		return ResourceKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(BuriedWrecks.MOD_ID, name));
 	}
 }

@@ -42,6 +42,8 @@ public class BuriedDatagen {
 
 		generator.addProvider(event.includeServer(), new BuriedStructureFeatureTagProvider(packOutput, lookupProvider, helper));
 		generator.addProvider(event.includeServer(), new BuriedBiomeTagProvider(packOutput, lookupProvider, helper));
+		generator.addProvider(event.includeServer(), new StructureUpdater("structure/buried_shipwreck",
+				BuriedWrecks.MOD_ID, helper, packOutput));
 	}
 
 	private static RegistrySetBuilder.PatchedRegistries getPatchedRegistries() {
